@@ -29,7 +29,7 @@ def version():
 def icon():
     return "icon.png"
 def qgisMinimumVersion():
-    return "1.0"
+    return "2.0"
 def classFactory(iface):
     # load PointsToPaths class from file PointsToPaths
     from pointstopaths import PointsToPaths
