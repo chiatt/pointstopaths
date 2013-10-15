@@ -41,22 +41,16 @@ class ProcessFeatures():
             self.provider = self.layer.dataProvider()
             self.feat = QgsFeature()
             self.allAttrs = self.provider.attributeIndexes()
-            #self.provider.select(self.allAttrs)
             self.feat_dict = {}
             self.order_attr_index = self.provider.fieldNameIndex(self.order_attr)
             self.group_attr_index = self.provider.fieldNameIndex(self.group_attr)
-            #while self.provider.nextFeature(self.feat):
-            f = open("/home/cyrus/Projects/test.txt", "w")
-            f.write(self.fname)
             for feat in self.provider.getFeatures():
                 self.geom = feat.geometry()
                 self.coords = self.geom.asPoint()
                 self.attrs = feat.attributes()
                 self.order_attr_value = self.attrs[self.order_attr_index]
                 self.group_attr_value = self.attrs[self.group_attr_index]
-                f.write(str(self.attrs))
                 for attr in self.attrs:
-                    f.write(str(attr) + "~~~" + str(self.order_attr_value))
                     try:
                         self.order_value = datetime.strptime(str(self.order_attr_value), str(self.format_attr))
                     except:
@@ -69,9 +63,6 @@ class ProcessFeatures():
                             self.feat_dict[attr].append((self.order_value, self.coords[0], self.coords[1]))
                         except:
                             self.feat_dict[attr] = [(self.order_value, self.coords[0], self.coords[1])]
-            f.write(str(self.feat_dict))
-            f.close()
-
         return self.feat_dict
 
 
@@ -82,7 +73,8 @@ class ProcessFeatures():
             list_of_times[0][0] + 0
             self.time_delta = gap
         except:
-            self.time_delta = timedelta(minutes=gap)
+            if gap != None:
+                self.time_delta = timedelta(minutes=gap)
         for i in range(len(list_of_times)):
             if gap != None:
                 if i < len(list_of_times)-1:
@@ -102,8 +94,6 @@ class ProcessFeatures():
         return self.arrays
 
 
-
-
     def writeShapefile(self, points_dict, crs, gap=None):
         self.fields = QgsFields()
         self.fields.append(QgsField("group", QVariant.String))
@@ -115,7 +105,12 @@ class ProcessFeatures():
         #gap = 60
         for (ky, vals) in points_dict.iteritems():
             if len(vals) > 1:
+                f = open("/home/cyrus/Projects/test.txt", "w")
+                f.write(str(vals))
                 vals.sort()
+                f.write(str(vals))
+                f.write(str(gap))
+                f.close()
                 self.gapped_vals = self.findGaps(vals, gap)
                 for val in self.gapped_vals:
                     if len(val) > 1:
@@ -125,9 +120,6 @@ class ProcessFeatures():
                         for i in val:
                             self.verticies.append(QgsPoint(i[1], i[2]))
                         self.fet.setGeometry(QgsGeometry.fromPolyline(self.verticies))
-                        #self.fet.setAttributes([1, 'test1'])
-                        #self.fet.setAttributes([2, 'test2'])
-                        #self.fet.setAttributes([3, 'test3'])
                         self.fet.setAttributes([str(ky), str(val[0][0]), str(val[-1][0])])
                         self.writer.addFeature(self.fet)
         del self.writer

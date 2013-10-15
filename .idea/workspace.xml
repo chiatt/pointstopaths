@@ -2,21 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8970d5c9-89aa-4944-994f-5805a6716313" name="Default" comment="Added metadata.txt file">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/__init__.py" afterPath="$PROJECT_DIR$/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pointstopaths.py" afterPath="$PROJECT_DIR$/pointstopaths.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pointstopathsdialog.py" afterPath="$PROJECT_DIR$/pointstopathsdialog.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test_data/points_to_paths_test_input_v02.dbf" afterPath="$PROJECT_DIR$/test_data/points_to_paths_test_input_v02.dbf" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/processfeatures.py" afterPath="$PROJECT_DIR$/processfeatures.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="pointstopaths_v02.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="8970d5c9-89aa-4944-994f-5805a6716313" time="1381810115015" ignored="false" />
+    <file path="/Dummy.txt" changelist="8970d5c9-89aa-4944-994f-5805a6716313" time="1381840271328" ignored="false" />
     <file path="/metadata.txt" changelist="8970d5c9-89aa-4944-994f-5805a6716313" time="1381689696603" ignored="false" />
     <file path="/.gitignore" changelist="8970d5c9-89aa-4944-994f-5805a6716313" time="1381690268928" ignored="false" />
     <file path="/pointstopathsdialog.py" changelist="8970d5c9-89aa-4944-994f-5805a6716313" time="1381693499452" ignored="false" />
     <file path="/__init__.py" changelist="8970d5c9-89aa-4944-994f-5805a6716313" time="1381692515786" ignored="false" />
     <file path="/pointstopaths.py" changelist="8970d5c9-89aa-4944-994f-5805a6716313" time="1381692431748" ignored="false" />
-    <file path="/processfeatures.py" changelist="8970d5c9-89aa-4944-994f-5805a6716313" time="1381814952727" ignored="false" />
+    <file path="/processfeatures.py" changelist="8970d5c9-89aa-4944-994f-5805a6716313" time="1381842458591" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,7 +73,7 @@
       <file leaf-file-name="processfeatures.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/processfeatures.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="66" column="52" selection-start="3295" selection-end="3295" vertical-scroll-proportion="0.65211457">
+            <state line="108" column="34" selection-start="5196" selection-end="5196" vertical-scroll-proportion="0.68784225">
               <folding />
             </state>
           </provider>
@@ -146,8 +144,8 @@
   </component>
   <component name="ProjectFrameBounds">
     <option name="y" value="24" />
-    <option name="width" value="1600" />
-    <option name="height" value="876" />
+    <option name="width" value="1920" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -175,7 +173,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -204,14 +201,15 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="options.lastSelected" value="project.propVCSSupport.Mappings" />
-    <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
+    <property name="options.splitter.details.proportions" value="0.2" />
   </component>
   <component name="PyConsoleOptionsProvider">
     <option name="myPythonConsoleState">
@@ -315,14 +313,14 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="24" width="1600" height="876" extended-state="6" />
+    <frame x="0" y="24" width="1920" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.12290862" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.12433298" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -505,7 +503,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/processfeatures.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="66" column="52" selection-start="3295" selection-end="3295" vertical-scroll-proportion="0.65211457">
+        <state line="108" column="34" selection-start="5196" selection-end="5196" vertical-scroll-proportion="0.68784225">
           <folding />
         </state>
       </provider>
