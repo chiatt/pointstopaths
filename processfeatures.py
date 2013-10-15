@@ -41,17 +41,22 @@ class ProcessFeatures():
             self.provider = self.layer.dataProvider()
             self.feat = QgsFeature()
             self.allAttrs = self.provider.attributeIndexes()
-            self.provider.select(self.allAttrs)
+            #self.provider.select(self.allAttrs)
             self.feat_dict = {}
             self.order_attr_index = self.provider.fieldNameIndex(self.order_attr)
             self.group_attr_index = self.provider.fieldNameIndex(self.group_attr)
-            while self.provider.nextFeature(self.feat):
-                self.geom = self.feat.geometry()
+            #while self.provider.nextFeature(self.feat):
+            f = open("/home/cyrus/Projects/test.txt", "w")
+            f.write(self.fname)
+            for feat in self.provider.getFeatures():
+                self.geom = feat.geometry()
                 self.coords = self.geom.asPoint()
-                self.attrs = self.feat.attributeMap()
-                self.order_attr_value = self.attrs[self.order_attr_index].toString()
-                self.group_attr_value = self.attrs[self.group_attr_index].toString()
-                for (k, attr) in self.attrs.iteritems():
+                self.attrs = feat.attributes()
+                self.order_attr_value = self.attrs[self.order_attr_index]
+                self.group_attr_value = self.attrs[self.group_attr_index]
+                f.write(str(self.attrs))
+                for attr in self.attrs:
+                    f.write(str(attr) + "~~~" + str(self.order_attr_value))
                     try:
                         self.order_value = datetime.strptime(str(self.order_attr_value), str(self.format_attr))
                     except:
@@ -59,11 +64,14 @@ class ProcessFeatures():
                             self.order_value = float(self.order_attr_value)
                         except:
                             raise ValueError, 'Order field is not an integer type or date format is invalid'
-                    if k == self.group_attr_index:
+                    if attr == self.group_attr_value:
                         try:
-                            self.feat_dict[attr.toString()].append((self.order_value, self.coords[0], self.coords[1]))
+                            self.feat_dict[attr].append((self.order_value, self.coords[0], self.coords[1]))
                         except:
-                            self.feat_dict[attr.toString()] = [(self.order_value, self.coords[0], self.coords[1])]
+                            self.feat_dict[attr] = [(self.order_value, self.coords[0], self.coords[1])]
+            f.write(str(self.feat_dict))
+            f.close()
+
         return self.feat_dict
 
 
@@ -94,9 +102,14 @@ class ProcessFeatures():
         return self.arrays
 
 
+
+
     def writeShapefile(self, points_dict, crs, gap=None):
-        self.fields = {0 : QgsField("group", QVariant.String), 1 : QgsField("begin", QVariant.String),2 : QgsField("end", QVariant.String)}
-        self.writer = QgsVectorFileWriter(self.fname, "CP1250", self.fields, QGis.WKBLineString, crs)
+        self.fields = QgsFields()
+        self.fields.append(QgsField("group", QVariant.String))
+        self.fields.append(QgsField("begin", QVariant.String))
+        self.fields.append(QgsField("end", QVariant.String))
+        self.writer = QgsVectorFileWriter(self.fname, "CP1250", self.fields, QGis.WKBLineString, crs, "ESRI Shapefile")
         if self.writer.hasError() != QgsVectorFileWriter.NoError:
             print "Error when creating shapefile: ", self.writer.hasError()
         #gap = 60
@@ -112,8 +125,9 @@ class ProcessFeatures():
                         for i in val:
                             self.verticies.append(QgsPoint(i[1], i[2]))
                         self.fet.setGeometry(QgsGeometry.fromPolyline(self.verticies))
-                        self.fet.addAttribute(0, QVariant(str(ky)))
-                        self.fet.addAttribute(1, QVariant(str(val[0][0])))
-                        self.fet.addAttribute(2, QVariant(str(val[-1][0])))
+                        #self.fet.setAttributes([1, 'test1'])
+                        #self.fet.setAttributes([2, 'test2'])
+                        #self.fet.setAttributes([3, 'test3'])
+                        self.fet.setAttributes([str(ky), str(val[0][0]), str(val[-1][0])])
                         self.writer.addFeature(self.fet)
         del self.writer

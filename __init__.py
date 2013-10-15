@@ -21,7 +21,7 @@
  This script initializes the plugin, making it known to QGIS.
 """
 def name():
-    return "Points to Paths"
+    return "PointsToPaths"
 def description():
     return "Converts points to lines with verticies grouped by a text or integer field and ordered by an integer or date string field (based on PointsToOne, but intended for wildlife tracking data)"
 def version():

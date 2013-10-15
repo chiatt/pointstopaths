@@ -55,9 +55,10 @@ class PointsToPathsDialog(QtGui.QDialog,Ui_PointsToPaths):
         if inputLayer != "":
             changedLayer = getVectorLayerByName( inputLayer )
             changedField = changedLayer.dataProvider().fields()
-            for i in changedField:
-                self.ui.orderField.addItem( unicode( changedField[i].name() ) )
-                self.ui.attrField.addItem( unicode( changedField[i].name() ) )
+            for field in changedField:
+                name = field.name()
+                self.ui.orderField.addItem(name)
+                self.ui.attrField.addItem(name)
 
     # Return list point layer names in QgsMapLayerRegistry
     # adopted from 'points2one', Copyright (C) 2010 Pavol Kapusta & Goyo Diaz
@@ -101,7 +102,7 @@ class PointsToPathsDialog(QtGui.QDialog,Ui_PointsToPaths):
         outFilePath = saveDialog(self)
         if not outFilePath:
             return
-        self.setOutFilePath(QtCore.QString(outFilePath))
+        self.setOutFilePath(outFilePath)
 
     # adopted from 'points2one', Copyright (C) 2010 Pavol Kapusta & Goyo Diaz
     def getOutFilePath(self):
@@ -155,7 +156,7 @@ def getLayerNames( vTypes ):
 def saveDialog(parent):
     settings = QtCore.QSettings()
     key = '/UI/lastShapefileDir'
-    outDir = settings.value(key).toString()
+    outDir = settings.value(key)
     filter = 'Shapefiles (*.shp)'
     outFilePath = QtGui.QFileDialog.getSaveFileName(parent, parent.tr('Save output shapefile'), outDir, filter)
     outFilePath = unicode(outFilePath)

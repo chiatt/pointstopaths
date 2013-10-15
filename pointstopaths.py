@@ -28,7 +28,8 @@ import resources
 # Import the code for the dialog
 from pointstopathsdialog import PointsToPathsDialog
 
-class PointsToPaths:
+
+class PointsToPaths(object):
 
     def __init__(self, iface):
         # Save reference to the QGIS interface
@@ -36,8 +37,8 @@ class PointsToPaths:
 
     def initGui(self):
         # Create action that will start plugin configuration
-        self.action = QAction(QIcon(":/plugins/pointstopaths/icon.png"), \
-            "Points to Paths", self.iface.mainWindow())
+        self.action = QAction(QIcon(":/plugins/pointstopaths/icon.png"),
+                              "Points to Paths", self.iface.mainWindow())
         # connect the action to the run method
         QObject.connect(self.action, SIGNAL("triggered()"), self.run)
 
@@ -47,7 +48,7 @@ class PointsToPaths:
 
     def unload(self):
         # Remove the plugin menu item and icon
-        self.iface.removePluginMenu("&Points to Paths",self.action)
+        self.iface.removePluginMenu("&Points to Paths", self.action)
         self.iface.removeToolBarIcon(self.action)
 
     # run method that performs all the real work
