@@ -39,12 +39,15 @@ class ProcessFeatures():
         else:
             QgsMapLayerRegistry.instance().addMapLayer(self.layer)
             self.provider = self.layer.dataProvider()
-            self.feat = QgsFeature()
+            #self.feat = QgsFeature()
+            self.features = self.layer.selectedFeatures()
+            if len(self.features) == 0:
+                self.features = self.provider.getFeatures()
             self.allAttrs = self.provider.attributeIndexes()
             self.feat_dict = {}
             self.order_attr_index = self.provider.fieldNameIndex(self.order_attr)
             self.group_attr_index = self.provider.fieldNameIndex(self.group_attr)
-            for feat in self.provider.getFeatures():
+            for feat in self.features:
                 self.geom = feat.geometry()
                 self.coords = self.geom.asPoint()
                 self.attrs = feat.attributes()
