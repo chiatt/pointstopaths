@@ -1,4 +1,4 @@
 # Compiled source #
 ###################
 *.pyc
-/.idea/*
+.idea/
