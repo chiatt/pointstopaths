@@ -108,12 +108,7 @@ class ProcessFeatures():
         #gap = 60
         for (ky, vals) in points_dict.iteritems():
             if len(vals) > 1:
-                f = open("/home/cyrus/Projects/test.txt", "w")
-                f.write(str(vals))
                 vals.sort()
-                f.write(str(vals))
-                f.write(str(gap))
-                f.close()
                 self.gapped_vals = self.findGaps(vals, gap)
                 for val in self.gapped_vals:
                     if len(val) > 1:
