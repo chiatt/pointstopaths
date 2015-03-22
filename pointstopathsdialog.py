@@ -87,7 +87,7 @@ class PointsToPathsDialog(QtGui.QDialog,Ui_PointsToPaths):
             provider = layer.dataProvider()
             processor = ProcessFeatures(layer, self.getOutFilePath(), self.ui.orderField.currentText(), self.getTimeFormat(), self.ui.attrField.currentText())
             points = processor.generatePointDict()
-            processor.writeShapefile(points, layer.crs(), self.getGapPeriod())
+            processor.writeShapefile(points, layer.crs(), self.getGapPeriod(), self.getLinesPerVertex())
             message = unicode(self.tr('Created output shapefile:'))
             message = '\n'.join([message, unicode(self.getOutFilePath())])
             message = '\n'.join([message,unicode(self.tr('Would you like to add the new layer to the TOC?'))])
@@ -125,6 +125,10 @@ class PointsToPathsDialog(QtGui.QDialog,Ui_PointsToPaths):
         else:
             gap = None
         return gap
+
+    def getLinesPerVertex(self):
+        is_checked = self.ui.linePerVertex.isChecked()
+        return is_checked
 
 # Return QgsVectorLayer from a layer name ( as string )
 # adopted from 'fTools Plugin', Copyright (C) 2009  Carson Farmer

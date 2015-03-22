@@ -97,7 +97,7 @@ class ProcessFeatures():
         return self.arrays
 
 
-    def writeShapefile(self, points_dict, crs, gap=None):
+    def writeShapefile(self, points_dict, crs, gap=None, linesPerVertex=None):
         self.fields = QgsFields()
         self.fields.append(QgsField("group", QVariant.String))
         self.fields.append(QgsField("begin", QVariant.String))
@@ -105,7 +105,6 @@ class ProcessFeatures():
         self.writer = QgsVectorFileWriter(self.fname, "CP1250", self.fields, QGis.WKBLineString, crs, "ESRI Shapefile")
         if self.writer.hasError() != QgsVectorFileWriter.NoError:
             print "Error when creating shapefile: ", self.writer.hasError()
-        #gap = 60
         for (ky, vals) in points_dict.iteritems():
             if len(vals) > 1:
                 vals.sort()
@@ -113,11 +112,22 @@ class ProcessFeatures():
                 for val in self.gapped_vals:
                     if len(val) > 1:
                         val.sort()
-                        self.fet = QgsFeature()
-                        self.verticies = []
-                        for i in val:
-                            self.verticies.append(QgsPoint(i[1], i[2]))
-                        self.fet.setGeometry(QgsGeometry.fromPolyline(self.verticies))
-                        self.fet.setAttributes([str(ky), str(val[0][0]), str(val[-1][0])])
-                        self.writer.addFeature(self.fet)
+                        if linesPerVertex == True:
+                            for i, v in enumerate(val[:-1]):
+                                self.fet = QgsFeature()
+                                start = val[i]
+                                end = val[i + 1]
+                                if start[1] != end[1] and start[2] != end[2]:
+                                    self.verticies = [QgsPoint(start[1], start[2]), QgsPoint(end[1], end[2])]
+                                    self.fet.setGeometry(QgsGeometry.fromPolyline(self.verticies))
+                                    self.fet.setAttributes([str(ky), str(start[0]), str(end[0])])
+                                    self.writer.addFeature(self.fet)
+                        else:
+                            self.fet = QgsFeature()
+                            self.verticies = []
+                            for i in val:
+                                self.verticies.append(QgsPoint(i[1], i[2]))
+                            self.fet.setGeometry(QgsGeometry.fromPolyline(self.verticies))
+                            self.fet.setAttributes([str(ky), str(val[0][0]), str(val[-1][0])])
+                            self.writer.addFeature(self.fet)
         del self.writer

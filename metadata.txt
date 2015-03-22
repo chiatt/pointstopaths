@@ -12,7 +12,7 @@
 name=PointsToPaths
 qgisMinimumVersion=2.0
 description=Converts points to lines with verticies grouped by a text or integer field and ordered by an integer or date string field. Based on PointsToOne, but intended for wildlife tracking data.
-version=0.3
+version=0.4
 author=Cyrus Hiatt
 email=cyrusnhiatt@gmail.com
 
@@ -24,7 +24,7 @@ email=cyrusnhiatt@gmail.com
 #changelog=Modified for QGIS 2.0
 
 # tags are comma separated with spaces allowed
-tags=python,scripts
+tags=python,scripts,line,lines,path,paths,ecology,wildlife,animal
 
 repository=https://github.com/chiatt/pointstopaths
 icon=icon.png
