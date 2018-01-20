@@ -54,13 +54,19 @@ class ProcessFeatures():
                 self.order_attr_value = self.attrs[self.order_attr_index]
                 self.group_attr_value = self.attrs[self.group_attr_index]
                 for attr in self.attrs:
-                    try:
-                        self.order_value = datetime.strptime(str(self.order_attr_value), str(self.format_attr))
-                    except:
+                    for conversion_fn in (
+                            (lambda d: datetime.strptime(str(d), str(self.format_attr))),
+                            (lambda d: float(d)),
+                            (lambda d: d.toPyDateTime()),
+                            (lambda d: d.toPyDate()),
+                    ):
                         try:
-                            self.order_value = float(self.order_attr_value)
+                            self.order_value = conversion_fn(self.order_attr_value)
+                            break
                         except:
-                            raise ValueError, 'Order field is not an integer type or date format is invalid'
+                            pass
+                    if not hasattr(self, 'order_value'):
+                        raise ValueError, 'Order field is not an integer type or date format is invalid'
                     if attr == self.group_attr_value:
                         try:
                             self.feat_dict[attr].append((self.order_value, self.coords[0], self.coords[1]))
